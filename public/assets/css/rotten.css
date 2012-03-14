@@ -1,0 +1,41 @@
+body{
+    
+}
+
+div#wrapper{
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#movie_image{
+    float: left;
+}
+
+div#movie_info_box{
+    padding-left: 20px;
+    float: left;
+    width: 659px;
+}
+
+div.clearer{
+    clear:both;
+}
+
+.img_wrapper{
+    position: relative;
+}
+
+.movie_add_btn{
+    position: absolute;
+    bottom: 0;
+/*    background: red;*/
+    width: 140px;
+    text-align: center;
+}
+
+.add_link{
+    text-align: center;
+    background: black;
+    color: #FFF;
+    padding: 4px 10px;
+}
