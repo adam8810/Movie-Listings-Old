@@ -25,17 +25,20 @@ div.clearer{
     position: relative;
 }
 
-.movie_add_btn{
+.movie_btn{
+    display: none;
     position: absolute;
-    bottom: 0;
-/*    background: red;*/
+    bottom: 10px;
     width: 140px;
     text-align: center;
 }
 
-.add_link{
+.button_link{
+    text-transform: uppercase;
+    text-decoration: none;
     text-align: center;
     background: black;
+    border: 1px solid #FFF;
     color: #FFF;
     padding: 4px 10px;
 }
