@@ -40,13 +40,20 @@ class Search extends \Model {
             $movie->year = $json->movies[$i]->year;
             $movie->m_rating = $json->movies[$i]->mpaa_rating;
             $movie->id = $json->movies[$i]->id;
-//            $movie->r_rating_aud = $json->movies[$i]->ratings->audience_rating;
-//            $movie->r_rating_crit = $json->movies[$i]->ratings->critics_rating;
             
+            // Ratings aren't always available, check to make sure they exist first
+            if (isset($json->movies[$i]->ratings->audience_rating))
+                $movie->r_a_rating = $json->movies[$i]->ratings->audience_rating;
+            if (isset($json->movies[$i]->ratings->critics_rating))
+                $movie->r_c_rating = $json->movies[$i]->ratings->critics_rating;
+            if (isset($json->movies[$i]->ratings->audience_score))
+                $movie->r_a_score = $json->movies[$i]->ratings->audience_score;
+            if (isset($json->movies[$i]->ratings->critics_score))
+                $movie->r_c_score = $json->movies[$i]->ratings->critics_score;
             
             array_push($movie_array, $movie);
         }
-        
+
         return $movie_array;
     }
 
