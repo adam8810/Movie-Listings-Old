@@ -3,6 +3,31 @@
         <?= Asset::CSS('rotten.css'); ?>
 
         <title><?= $title; ?></title>
+
+        <?= Asset::js('jquery.js'); ?>       
+        <script type="text/javascript">
+            $('document').ready(function()
+            {
+                
+                $('a').click(function(e)
+                {
+                    // Prevent from navigating away from page
+                    e.preventDefault();
+                                    
+                    // Use Ajax call to interact with database
+                    $.ajax({
+                        url: this,
+                        success: function(){
+                            
+                        }
+                    })
+                                    
+                });
+            });
+            
+    
+        </script>
+
     </head>
     <body>
         <div id="wrapper">
@@ -17,7 +42,6 @@
                 </div>
                 <table>
                     <?php
-                    
                     if ($movie != null && 1)
                     {
                         foreach ($movie as $m)
@@ -34,7 +58,7 @@
                                         <li>Title: <?= $m['title']; ?></li>
                                         <li>Year: <?= $m['year']; ?></li>
                                         <li>MPAA Rating: <?= $m['m_rating']; ?></li>
-                                        <li><a href="remove_movie/<?= $m['ID'];?>">Remove from List</a></li>
+                                        <li><a href="remove_movie/<?= $m['ID']; ?>">Remove from List</a></li>
                                     </ul>
                                 </td></tr>
                             <?php
