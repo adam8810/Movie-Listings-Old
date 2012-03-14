@@ -31,18 +31,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         else
             $data['movie'] = null;
         
-
-
-//
-//        $data['original_img'] = $listing->img;
         $data['title'] = 'Rotten Tomatoes';
-//        $data['rating'] = $listing->rating;
-//        $data['year'] = $listing->year;
-//
-//
-//        $data['cast_characters'] = $listing->cast_characters;
-//        $data['cast_actors'] = $listing->cast_names;
-
 
 
         return View::forge('playground/apis/rotten_search', $data);
@@ -50,7 +39,6 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     public function action_add_movie($id = null)
     {
-        echo 'id= ' . $id;
         $title = Input::get('title');
         $image = Input::get('img');
         $m_rating = Input::get('m_rating');
