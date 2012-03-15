@@ -12,13 +12,41 @@ div#wrapper{
 }
 
 div#movie_info_box{
-    padding-left: 20px;
     float: left;
-    width: 659px;
+    width: 800px;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 div.clearer{
     clear:both;
+}
+
+#view_controls{
+    float: right;
+}
+
+#view_controls ul li{
+    display: inline;
+}
+
+table.movie_table{
+    width: 100%;
+}
+
+table.movie_table tr.tr_image{
+    
+}
+
+table.movie_table tr:nth-child(even){
+    background: lightgray;
+}
+
+table.movie_table .tr_item td.title{
+    padding: 0 10px;
+}
+table.movie_table .tr_item td.content{
+    width: 100%;
 }
 
 .img_wrapper{
