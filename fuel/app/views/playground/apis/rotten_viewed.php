@@ -1,6 +1,7 @@
 <html>
     <head>
         <?= Asset::CSS('rotten.css'); ?>
+        <? //= Asset::JS('uservoice.js'); ?>
 
         <title><?= $title; ?></title>
 
@@ -44,6 +45,7 @@
                     switch(this.id)
                     {
                         case 'list':
+//                            $('div#movie_info_box').css('height','100%');
                             $('.img_wrapper').css('display','none');
                             $('span.header').css('display','none');
                             $('div.movie_item').css('padding','5px');
@@ -55,28 +57,35 @@
                             $('.content.m_rating').css('width', 70);
                             $('div.content').css('float', 'left');
                             $('div#movie_head').css('display', 'block');
+                            $('div#movie_info_box').css('width','800px');
                             break;
                             
                         case 'albumlist':
                             $('.img_wrapper').css('display','block');
                             $('span.header').css('display','inline');
                             $('div.movie_item').css('padding','5px 10px 10px 150px');
-                            
+                            $('div.movie_item').css('width','100%');
+                            $('div.movie_item').css('float','none');
                             $('.content').css('width', '100%');
-                            $('.movie_item').css('height','180px');
+                            $('.movie_item').css('height','187px');
                             $('.movie_item').css('margin-bottom','10px');
-                            $('div.content').css('float', 'inline');
+                            $('div.content').css('display', 'block');
                             $('div#movie_head').css('display', 'none');
+                            $('div#movie_info_box').css('width','800px');
                             
                             break;
                         case 'grid':
                             $('.img_wrapper').css('display','block');
                             $('span.header').css('display','inline');
+                            $('.movie_item').css('margin-bottom','0px');
+                            $('span.header').css('display','inline');
                             $('div.content').css('display','none');
                             $('div.movie_item').css('width','145px');
+                            $('div.movie_item').css('height','202px');
                             $('div.movie_item').css('padding','0px');
                             $('div.movie_item').css('float','left');
                             $('div#movie_info_box').css('width','1015px');
+                            $('div#movie_head').css('display', 'none');
                             break;
                     }
                 })
@@ -123,7 +132,7 @@
                             <div class="img_wrapper">
                                 <img height="200" width="145" src="<?= $m['image']; ?>"/>
                                 <div class="movie_btn">
-                                    <a class="button_link remove" id="<?= $m['ID']; ?>" href="remove_movie/<?= $m['ID']; ?>">Remove</a>
+                                    <a class="button_link remove" id="<?= $m['ID']; ?>" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
                                 </div>
                             </div>
                             <div class="content title"><span class="header title">Title: </span><?= $m['title']; ?></div>
