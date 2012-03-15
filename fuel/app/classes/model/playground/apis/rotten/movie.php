@@ -34,10 +34,10 @@ class Movie extends \Model {
         // Release Dates
         $this->release_dvd = $release_dvd;
         $this->release_theater = $release_theater;
-        $this->cast = $cast;
-
-        // Reviews
-        $this->reviews = $reviews;
+        
+        $this->rented_to = $rented_to;
+        $this->rented_when = $rented_when;
+        
     }
 
 }
