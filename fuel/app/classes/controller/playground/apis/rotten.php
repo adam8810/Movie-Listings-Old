@@ -44,6 +44,10 @@ class Controller_Playground_Apis_Rotten extends Controller {
         $m_rating = Input::get('m_rating');
         $year = Input::get('year');
         $viewed = Input::get('viewed');
+        $r_a_rating = Input::get('r_a_rating');
+        $r_c_rating = Input::get('r_c_rating');
+        $r_a_score = Input::get('r_a_score');
+        $r_c_score = Input::get('r_c_score');
 
         DB::insert('movies')->set(array(
             'title' => $title,
@@ -51,7 +55,11 @@ class Controller_Playground_Apis_Rotten extends Controller {
             'm_rating' => $m_rating,
             'MID' => $id,
             'year' => $year,
-            'viewed' => $viewed
+            'viewed' => $viewed,
+            'r_a_rating' => $r_a_rating,
+            'r_c_rating' => $r_c_rating,
+            'r_a_score' => $r_a_score,
+            'r_c_score' => $r_c_score
         ))->execute();
     }
 
