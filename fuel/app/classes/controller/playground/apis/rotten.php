@@ -30,7 +30,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         }
         else
             $data['movie'] = null;
-        
+
         $data['title'] = 'Rotten Tomatoes';
 
 
@@ -74,19 +74,19 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         $data = array();
 
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','1')->execute();
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1', 'and', 'visible', 'like', '1')->and_where('visible', 'like', '1')->execute();
 
         $data['title'] = 'Viewed List';
 
 
         return View::forge('playground/apis/rotten_viewed', $data, false);
     }
-    
+
     public function action_wishlist($user_id = null)
     {
         $data = array();
 
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','0')->execute();
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '0')->execute();
 
         $data['title'] = 'Wishlist';
 
@@ -97,6 +97,16 @@ class Controller_Playground_Apis_Rotten extends Controller {
     public function action_remove_movie($ID)
     {
         DB::delete('movies')->where('ID', 'like', $ID)->execute();
+    }
+
+    public function action_hide_movie($ID)
+    {
+        DB::update('movies')->value('visible', '0')->where('ID', 'like', $ID)->execute();
+    }
+
+    public function action_unhide_movie($ID)
+    {
+        DB::update('movies')->value('visible', '1')->where('ID', 'like', $ID)->execute();
     }
 
 }
