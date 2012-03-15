@@ -48,6 +48,9 @@ class Controller_Playground_Apis_Rotten extends Controller {
         $r_c_rating = Input::get('r_c_rating');
         $r_a_score = Input::get('r_a_score');
         $r_c_score = Input::get('r_c_score');
+        $runtime = Input::get('runtime');
+        $release_dvd = Input::get('release_dvd');
+        $release_theater = Input::get('release_theater');
 
         DB::insert('movies')->set(array(
             'title' => $title,
@@ -59,7 +62,11 @@ class Controller_Playground_Apis_Rotten extends Controller {
             'r_a_rating' => $r_a_rating,
             'r_c_rating' => $r_c_rating,
             'r_a_score' => $r_a_score,
-            'r_c_score' => $r_c_score
+            'r_c_score' => $r_c_score,
+            'movie_added' => date('Y-m-d'),
+            'runtime' => $runtime,
+            'release_dvd' => $release_dvd,
+            'release_theater' => $release_theater
         ))->execute();
     }
 
@@ -67,7 +74,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         $data = array();
 
-        $data['movie'] = DB::select('title', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','1')->execute();
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','1')->execute();
 
         $data['title'] = 'Viewed List';
 
@@ -79,9 +86,9 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         $data = array();
 
-        $data['movie'] = DB::select('title', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','0')->execute();
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed','like','0')->execute();
 
-        $data['title'] = 'WishList';
+        $data['title'] = 'Wishlist';
 
 
         return View::forge('playground/apis/rotten_viewed', $data, false);
