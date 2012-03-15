@@ -43,11 +43,15 @@ class Search extends \Model {
             
             // Ratings aren't always available, check to make sure they exist first
             if (isset($json->movies[$i]->ratings->audience_rating))
+                
                 $movie->r_a_rating = $json->movies[$i]->ratings->audience_rating;
+            
             if (isset($json->movies[$i]->ratings->critics_rating))
                 $movie->r_c_rating = $json->movies[$i]->ratings->critics_rating;
+            
             if (isset($json->movies[$i]->ratings->audience_score))
                 $movie->r_a_score = $json->movies[$i]->ratings->audience_score;
+            
             if (isset($json->movies[$i]->ratings->critics_score))
                 $movie->r_c_score = $json->movies[$i]->ratings->critics_score;
             
