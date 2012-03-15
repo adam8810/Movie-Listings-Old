@@ -25,9 +25,11 @@ class Movie extends \Model {
         $this->img = $img;
 
         // Ratings
-        $this->m_rating = $m_rating;
-        $this->r_rating = $r_rating;
-        $this->r_rating_crit = $r_rating_crit;
+        $this->m_rating = $m_rating;        // MPAA Rating
+        $this->r_a_rating = $r_a_rating;      // Rotten Rating
+        $this->r_c_rating = $r_c_rating;    // Rotten Critic Rating
+        $this->r_c_score = $r_c_score;      // Rotten Critic Score
+        $this->r_a_score = $r_a_score;      // Rotten Audience Score
 
         // Release Dates
         $this->release_dvd = $release_dvd;
