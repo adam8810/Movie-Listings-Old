@@ -1,6 +1,7 @@
 <?php
 
 use Model\Playground\Apis\Rotten\Search;
+use Fuel\Core\Input;
 
 class Controller_Playground_Apis_Rotten extends Controller {
 
@@ -72,10 +73,19 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     public function action_viewed($user_id = null)
     {
+        // Get GET data
+        $orderby = Input::get('orderby');
+        $method = Input::get('method');
+
         $data = array();
 
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1', 'and', 'visible', 'like', '1')->and_where('visible', 'like', '1')->execute();
+        if ($orderby == '')
+            $orderby = 'title';
+        
+        if ($method == '')
+            $method = 'ASC';
 
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1', 'and', 'visible', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, 'asc')->execute();
         $data['title'] = 'Viewed List';
 
 
