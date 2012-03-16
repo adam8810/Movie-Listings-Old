@@ -45,19 +45,24 @@
                     switch(this.id)
                     {
                         case 'list':
-//                            $('div#movie_info_box').css('height','100%');
-                            $('.img_wrapper').css('display','none');
                             $('span.header').css('display','none');
-                            $('div.movie_item').css('padding','5px');
-                            $('.content.title').css('width', 400);
+                            $('div.movie_item').css('padding','5px 5px 5px 60px');
+                            
                             $('.movie_item').css('height','50px');
                             $('.movie_item').css('margin-bottom','0px');
-                            $('.content.runtime').css('width', 100);
-                            $('.content.year').css('width', 50);
-                            $('.content.m_rating').css('width', 70);
+                            
+                            
                             $('div.content').css('float', 'left');
                             $('div#movie_head').css('display', 'block');
-                            $('div#movie_info_box').css('width','800px');
+                            $('div.movie_item.odd').css('background', '#F3F6FA');
+                            
+                            
+                            $('.img_wrapper').css('height', '50px').css('width','40px');
+                            $('.content.title').css('width', '50%');
+                            $('.content.runtime').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                            $('.content.year').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                            $('.content.m_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                            $('.content.our_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
                             break;
                             
                         case 'albumlist':
@@ -68,10 +73,9 @@
                             $('div.movie_item').css('float','none');
                             $('.content').css('width', '100%');
                             $('.movie_item').css('height','187px');
-                            $('.movie_item').css('margin-bottom','10px');
                             $('div.content').css('display', 'block');
                             $('div#movie_head').css('display', 'none');
-                            $('div#movie_info_box').css('width','800px');
+//                            $('div#movie_info_box').css('width','800px');
                             
                             break;
                         case 'grid':
@@ -84,7 +88,7 @@
                             $('div.movie_item').css('height','202px');
                             $('div.movie_item').css('padding','0px');
                             $('div.movie_item').css('float','left');
-                            $('div#movie_info_box').css('width','1015px');
+//                            $('div#movie_info_box').css('width','1015px');
                             $('div#movie_head').css('display', 'none');
                             break;
                     }
@@ -118,19 +122,21 @@
                 <div class="title movie_head_item content">Title</div>
                 <div class="runtime movie_head_item content">Runtime</div>
                 <div class="year movie_head_item content">Year</div>
-                <div class="m_rating movie_head_item content">MPAA Rating</div>
+                <div class="m_rating movie_head_item content">Rating</div>
+                <div class="our_rating movie_head_item content">Our Rating</div>
             </div>
             <div id="movie_info_box">
                 <?php
                 if ($movie != null && 1)
                 {
+                    $odd = 'true';
                     foreach ($movie as $m)
                     {
                         ?>
-                        <div class="movie_item" id="<?= $m['ID']; ?>">
+                        <div class="movie_item <?= $odd == 'true' ? 'odd' : 'even'; ?>" id="<?= $m['ID']; ?>">
 
                             <div class="img_wrapper">
-                                <img height="200" width="145" src="<?= $m['image']; ?>"/>
+                                <img height="100%" width="100%" src="<?= $m['image']; ?>"/>
                                 <div class="movie_btn">
                                     <a class="button_link remove" id="<?= $m['ID']; ?>" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
                                 </div>
@@ -138,11 +144,16 @@
                             <div class="content title"><span class="header title">Title: </span><?= $m['title']; ?></div>
                             <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m['runtime'] / 60) > 1 ? floor($m['runtime'] / 60) . ' hours' : floor($m['runtime'] / 60) . ' hour'); ?> and <?= $m['runtime'] % 60; ?> minutes</div>
                             <div class="content year"><span class="header year">Year: </span><?= $m['year']; ?></div>
-                            <div class="content m_rating"><span class="header m_rating">MPAA Rating: </span><?= $m['m_rating']; ?></div>
+                            <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m['m_rating']; ?></div>
                             <div class="clearer"></div>
 
                         </div>
                         <?php
+                        // Toggle even/odd
+                        if($odd == 'true')
+                            $odd = 'false';
+                        else
+                            $odd = 'true';
                     }
                 }
                 ?>
