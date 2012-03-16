@@ -18,6 +18,7 @@ div#movie_info_box{
     width: 100%;
     overflow-y: scroll;
     height: 100%;
+    border-top: 1px solid #999;
 }
 
 
@@ -71,12 +72,11 @@ div.movie_meta .content{
 
 #movie_head{
     display: none;
-    /*    height: 30px;*/
-    padding: 10px 0 25px 0;
+    height: 35px;
     background: #FAFAFA;
     width: 100%;
     font-weight: bold;
-    border-bottom: 4px solid #999;
+
 }
 
 .movie_head_item{
@@ -85,6 +85,16 @@ div.movie_meta .content{
     text-align: center;
     font-size: 15px;
     border-right: 1px solid #999;
+}
+
+.movie_head_item a{
+    background: #FAFAFA;
+    display: block;
+    padding: 10px 10px 10px 0;
+}
+
+.movie_head_item a:hover{
+    background: #D6DAE0;
 }
 
 .movie_btn{
