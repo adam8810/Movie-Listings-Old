@@ -84,8 +84,8 @@ class Controller_Playground_Apis_Rotten extends Controller {
         
         if ($method == '')
             $method = 'ASC';
-
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1', 'and', 'visible', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, 'asc')->execute();
+        
+        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1', 'and', 'visible', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, $method)->execute();
         $data['title'] = 'Viewed List';
 
 
