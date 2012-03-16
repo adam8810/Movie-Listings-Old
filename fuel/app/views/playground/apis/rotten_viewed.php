@@ -9,91 +9,115 @@
         <script type="text/javascript">
             $('document').ready(function()
             {
-                // Hover effect of Add/Remove Button
-                $('.img_wrapper').hover(function(){
-                    $('.movie_btn').css('display','block')
-                }, function(){
-                    $('.movie_btn').css('display','none')
-                })
-                
-                $('.button_link.remove').click(function(e)
+                switch (<?= Input::get('view') != '' ? "'" . Input::get('view') . "'" : "'albumlist'"; ?>)
                 {
-                    // Prevent from navigating away from page
-                    e.preventDefault();
+                    case 'list':
+                       
+                        view_list();
+                        break;
+                    case 'albumlist':
+                        view_albumlist()
+                        break;
+                    case 'grid':
+                        view_grid();
+                        break;
+                    }
+                
+                
+                    // Hover effect of Add/Remove Button
+                    $('.img_wrapper').hover(function(){
+                        $('.movie_btn').css('display','block')
+                    }, function(){
+                        $('.movie_btn').css('display','none')
+                    })
+                
+                    $('.button_link.remove').click(function(e)
+                    {
+                        // Prevent from navigating away from page
+                        e.preventDefault();
                                     
-                    // Use Ajax call to interact with database
-                    $.ajax({
-                        url: this,
-                        success: function(){
+                        // Use Ajax call to interact with database
+                        $.ajax({
+                            url: this,
+                            success: function(){
                             
+                            }
+                        })
+                    
+                        $('.movie_item#' + this.id).animate({
+                            height:0, width:0, opacity: .5
+                        }, 100, "linear", function(){
+                            $('.movie_item#' + this.id).css('display','none')
+                        } );
+                                    
+                    });
+                
+                
+                    $('a.view_btn').click(function(e){
+                        e.preventDefault();
+                    
+                    
+                        switch(this.id)
+                        {
+                            case 'list':
+                                alert(history.state);
+                                view_list();
+                                break;
+                            
+                            case 'albumlist':
+                                view_albumlist();
+                            
+                                break;
+                            case 'grid':
+                                view_grid();
+                                break;
                         }
                     })
-                    
-                    $('.movie_item#' + this.id).animate({
-                        height:0, width:0, opacity: .5
-                    }, 100, "linear", function(){
-                        $('.movie_item#' + this.id).css('display','none')
-                    } );
-                                    
-                });
                 
-                
-                $('a.view_btn').click(function(e){
-                    e.preventDefault();
-                    
-                    
-                    switch(this.id)
+                    function view_list()
                     {
-                        case 'list':
-                            $('span.header').css('display','none');
-                            $('div.movie_item').css('padding','5px 5px 5px 60px');
+                        $('span.header').css('display','none');
+                        $('div.movie_item').css('padding','5px 5px 5px 60px');
                             
-                            $('.movie_item').css('height','50px');
-                            $('.movie_item').css('margin-bottom','0px');
+                        $('.movie_item').css('height','50px').css('margin-bottom','0px');
                             
                             
-                            $('div.content').css('float', 'left');
-                            $('div#movie_head').css('display', 'block');
-                            $('div.movie_item.odd').css('background', '#F3F6FA');
+                        $('div.content').css('float', 'left');
+                        $('div#movie_head').css('display', 'block');
+                        $('div.movie_item.odd').css('background', '#F3F6FA');
                             
                             
-                            $('.img_wrapper').css('height', '50px').css('width','40px');
-                            $('.content.title').css('width', '50%');
-                            $('.content.runtime').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                            $('.content.year').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                            $('.content.m_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                            $('.content.our_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                            break;
-                            
-                        case 'albumlist':
-                            $('.img_wrapper').css('display','block');
-                            $('span.header').css('display','inline');
-                            $('div.movie_item').css('padding','5px 10px 10px 150px');
-                            $('div.movie_item').css('width','100%');
-                            $('div.movie_item').css('float','none');
-                            $('.content').css('width', '100%');
-                            $('.movie_item').css('height','187px');
-                            $('div.content').css('display', 'block');
-                            $('div#movie_head').css('display', 'none');
-//                            $('div#movie_info_box').css('width','800px');
-                            
-                            break;
-                        case 'grid':
-                            $('.img_wrapper').css('display','block');
-                            $('span.header').css('display','inline');
-                            $('.movie_item').css('margin-bottom','0px');
-                            $('span.header').css('display','inline');
-                            $('div.content').css('display','none');
-                            $('div.movie_item').css('width','145px');
-                            $('div.movie_item').css('height','202px');
-                            $('div.movie_item').css('padding','0px');
-                            $('div.movie_item').css('float','left');
-//                            $('div#movie_info_box').css('width','1015px');
-                            $('div#movie_head').css('display', 'none');
-                            break;
+                        $('.img_wrapper').css('height', '50px').css('width','40px');
+                        $('.content.title').css('width', '50%');
+                        $('.content.runtime').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                        $('.content.year').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                        $('.content.m_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                        $('.content.our_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
                     }
-                })
-            });
+                
+                    function view_albumlist()
+                    {
+                        $('.img_wrapper').css('display','block').css('height', '200px').css('width','145px');
+                        $('span.header').css('display','inline');
+                        $('div.movie_item').css('padding','5px 10px 10px 150px');
+                        $('div.movie_item').css('width','100%');
+                        $('div.movie_item').css('float','none');
+                        $('.content').css('width', '100%');
+                        $('.movie_item').css('height','187px');
+                        $('div.content').css('display', 'block');
+                        $('div#movie_head').css('display', 'none');
+                    }
+                
+                    function view_grid()
+                    {
+                        $('.img_wrapper').css('display','block').css('height', '200px').css('width','145px');
+                        $('span.header').css('display','inline');
+                        $('.movie_item').css('margin-bottom','0px');
+                        $('div.content').css('display','none');
+                        $('div.movie_item').css('width','145px').css('height','202px').css('padding','0px').css('float','left');
+                        $('div#movie_head').css('display', 'none');
+                    }
+                });
             
     
         </script>
@@ -119,11 +143,11 @@
             </div>
             <div class="clearer"></div>
             <div id="movie_head">
-                <div class="title movie_head_item content">Title</div>
-                <div class="runtime movie_head_item content">Runtime</div>
-                <div class="year movie_head_item content">Year</div>
-                <div class="m_rating movie_head_item content">Rating</div>
-                <div class="our_rating movie_head_item content">Our Rating</div>
+                <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Title</a></div>
+                <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime">Runtime</a></div>
+                <div class="year movie_head_item content"><a href="viewed?orderby=year">Year</a></div>
+                <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating">Rating</a></div>
+                <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating">Our Rating</a></div>
             </div>
             <div id="movie_info_box">
                 <?php
@@ -150,7 +174,7 @@
                         </div>
                         <?php
                         // Toggle even/odd
-                        if($odd == 'true')
+                        if ($odd == 'true')
                             $odd = 'false';
                         else
                             $odd = 'true';
