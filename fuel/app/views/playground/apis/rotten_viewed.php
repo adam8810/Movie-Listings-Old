@@ -1,5 +1,6 @@
 <html>
     <head>
+        <?= Asset::CSS('reset.css'); ?>
         <?= Asset::CSS('rotten.css'); ?>
         <? //= Asset::JS('uservoice.js'); ?>
 
@@ -32,9 +33,10 @@
                 
                     // Hover effect of Add/Remove Button
                     $('.img_wrapper').hover(function(){
-                        $('.movie_btn').css('display','block')
+                        //                        alert('.img_wrapper div#' + (this.id) + '.movie_btn a');
+                        $('.img_wrapper div#' + (this.id) + '.movie_btn').css('display','block')
                     }, function(){
-                        $('.movie_btn').css('display','none')
+                        $('.movie_btn a').css('display','none')
                     })
                 
                     $('.button_link.remove').click(function(e)
@@ -81,9 +83,8 @@
                 
                     function view_list()
                     {
-//                        $('div#movie_info_box').css('border-top','0');
                         $('span.header').css('display','none');
-                        $('div.movie_item').css('padding','5px 5px 5px 60px');
+                        $('div.movie_item').css('padding','5px 5px 5px 50px');
                             
                         $('.movie_item').css('height','50px').css('margin-bottom','0px');
                             
@@ -94,6 +95,9 @@
                             
                             
                         $('.img_wrapper').css('height', '50px').css('width','40px');
+                        $('.movie_head_item.image').css('width', '40px').css('height','37px').css('background','#F3F6FA').css('text-indent','-9999');
+                        
+                        
                         $('.content.title').css('width', '50%');
                         $('.content.runtime').css('width', '10%').css('text-align','right');
                         $('.content.year').css('width', '10%').css('text-align','right');
@@ -137,14 +141,22 @@
     </head>
     <body>
         <div id="wrapper">
+            <div id="top_box">
+                <div id="movie_form_box">
 
-            <div id="movie_form_box">
-
-                <?= Form::open(array('action' => 'playground/apis/rotten/search/', 'method' => 'get')); ?>
-                <?= Form::label('Movie Title'); ?>
-                <?= Form::input('title'); ?>
-                <?= Form::submit(); ?>
-                <?= Form::close(); ?>
+                    <?= Form::open(array('action' => 'playground/apis/rotten/search/', 'method' => 'get')); ?>
+                    <?= Form::label('Movie Title'); ?>
+                    <?= Form::input('title'); ?>
+                    <?= Form::submit(); ?>
+                    <?= Form::close(); ?>
+                </div>
+                <div id="page_controls">
+                    <ul>
+                        <li><a href="../rotten/search">S</a></li>
+                        <li><a href="../rotten/viewed">V</a></li>
+                        <li><a href="../rotten/wishlist">W</a></li>
+                    </ul>
+                </div>
                 <div id="view_controls">
                     <ul>
                         <li><a class="view_btn" id="list" href="#List">List</a></li>
@@ -152,18 +164,19 @@
                         <li><a class="view_btn" id="grid" href="#Grid">Grid</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="clearer"></div>
-            <div id="movie_head">
-                <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Title</a></div>
-                <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Runtime</a></div>
-                <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Year</a></div>
-                <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
-                <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Our Rating</a></div>
+                <div class="clearer"></div>
+                <div id="movie_head">
+                    <div class="image movie_head_item content">Image</div>
+                    <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Title</a></div>
+                    <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Runtime</a></div>
+                    <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Year</a></div>
+                    <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
+                    <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Our Rating</a></div>
+                </div>
             </div>
             <div id="movie_info_box">
                 <?php
-                if ($movie != null && 1)
+                if ($movie != null)
                 {
                     $odd = 'true';
                     foreach ($movie as $m)
@@ -171,14 +184,14 @@
                         ?>
                         <div class="movie_item <?= $odd == 'true' ? 'odd' : 'even'; ?>" id="<?= $m['ID']; ?>">
 
-                            <div class="img_wrapper">
-                                <img height="100%" width="100%" src="<?= $m['image']; ?>"/>
-                                <div class="movie_btn">
-                                    <a class="button_link remove" id="<?= $m['ID']; ?>" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
+                            <div id="<?= $m['ID']; ?>" class="img_wrapper">
+                                <img id="<?= $m['ID']; ?>" height="100%" width="100%" src="<?= $m['image']; ?>"/>
+                                <div id="<?= $m['ID']; ?>" class="movie_btn">
+                                    <a class="button_link remove" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
                                 </div>
                             </div>
                             <div class="content title"><span class="header title">Title: </span><?= $m['title']; ?></div>
-                            <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m['runtime'] / 60) > 1 ? floor($m['runtime'] / 60) . ' hours' : floor($m['runtime'] / 60) . ' hour'); ?> and <?= $m['runtime'] % 60; ?> minutes</div>
+                            <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m['runtime'] / 60) > 1 ? floor($m['runtime'] / 60) . ' hrs' : floor($m['runtime'] / 60) . ' hr'); ?> and <?= $m['runtime'] % 60; ?> min</div>
                             <div class="content year"><span class="header year">Year: </span><?= $m['year']; ?></div>
                             <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m['m_rating']; ?></div>
                             <div class="clearer"></div>
@@ -195,11 +208,8 @@
                 ?>
 
             </div>
-
-
-
             <div class="clearer"></div>
         </div>
-
+        <div class="clearer" style="display:block"></div>
     </body>
 </html>
