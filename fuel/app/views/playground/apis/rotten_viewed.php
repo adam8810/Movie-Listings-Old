@@ -22,6 +22,12 @@
                         view_grid();
                         break;
                     }
+                    
+                    // Highlight the movie_head_item that is currently being sorted
+                    $orderby = <?= Input::get('orderby') != '' ? "'" . Input::get('orderby') . "'" : "'title'"; ?>;
+                                        
+                    $('.movie_head_item.content.' + $orderby + ' a').css('background','#D6DAE0');
+                    
                 
                 
                     // Hover effect of Add/Remove Button
@@ -60,7 +66,6 @@
                         switch(this.id)
                         {
                             case 'list':
-                                alert(history.state);
                                 view_list();
                                 break;
                             
@@ -76,6 +81,7 @@
                 
                     function view_list()
                     {
+//                        $('div#movie_info_box').css('border-top','0');
                         $('span.header').css('display','none');
                         $('div.movie_item').css('padding','5px 5px 5px 60px');
                             
@@ -89,10 +95,10 @@
                             
                         $('.img_wrapper').css('height', '50px').css('width','40px');
                         $('.content.title').css('width', '50%');
-                        $('.content.runtime').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                        $('.content.year').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                        $('.content.m_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
-                        $('.content.our_rating').css('width', '10%').css('text-align','right').css('padding-right','5px');
+                        $('.content.runtime').css('width', '10%').css('text-align','right');
+                        $('.content.year').css('width', '10%').css('text-align','right');
+                        $('.content.m_rating').css('width', '10%').css('text-align','right');
+                        $('.content.our_rating').css('width', '10%').css('text-align','right');
                     }
                 
                     function view_albumlist()
@@ -106,6 +112,12 @@
                         $('.movie_item').css('height','187px');
                         $('div.content').css('display', 'block');
                         $('div#movie_head').css('display', 'none');
+                        
+                        $('.content.title').css('width', '100%').css('display','inline');
+                        $('.content.runtime').css('width', '100%').css('text-align','left').css('padding-right','0px');
+                        $('.content.year').css('width', '100%').css('text-align','left').css('padding-right','0px');
+                        $('.content.m_rating').css('width', '100%').css('text-align','left').css('padding-right','0px');
+                        $('.content.our_rating').css('width', '100%').css('text-align','left').css('padding-right','0px');
                     }
                 
                     function view_grid()
@@ -144,10 +156,10 @@
             <div class="clearer"></div>
             <div id="movie_head">
                 <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Title</a></div>
-                <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime">Runtime</a></div>
-                <div class="year movie_head_item content"><a href="viewed?orderby=year">Year</a></div>
-                <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating">Rating</a></div>
-                <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating">Our Rating</a></div>
+                <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Runtime</a></div>
+                <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Year</a></div>
+                <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
+                <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Our Rating</a></div>
             </div>
             <div id="movie_info_box">
                 <?php
