@@ -30,6 +30,7 @@ div#movie_info_box{
     /*    float: left;*/
     width: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 90%;
     border-top: 1px solid #999;
 }
@@ -42,27 +43,29 @@ div.clearer{
 #page_controls{
     position: absolute;
     top: 20px;
-    right: 110px;
+    right: 108px;
 }
 
 #page_controls ul li{
-    display: block;
     float: left;
-    width: 20px;
-    height: 7px;
-    background: #999;
-    padding: 7px 0 7px 7px;
     border-right: 1px solid #eee;
-    font-size: 10px;
+    font-size: 12px;
     text-align: center;
 }
 
 #page_controls ul li a{
     text-decoration: none;
+    padding: 5px 0px 4px 0px;
     color: #FFF;
     display: block;
+    background: #999;
     height: 100%;
-    width: 100%;
+    width: 30px;
+}
+
+#page_controls ul li a:hover{
+    background: #EEE;
+    color: #000;
 }
 
 #view_controls{
@@ -78,7 +81,7 @@ div.clearer{
     height: 7px;
     background: #999;
     padding: 7px 0 7px 7px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #EEE;
     text-indent: -9999px;
 }
 
@@ -188,6 +191,8 @@ div.movie_meta .content{
     background: #FAFAFA;
     display: block;
     padding: 10px 10px 10px 0;
+    text-decoration: none;
+    color: #000;
 }
 
 .movie_head_item a:hover{
