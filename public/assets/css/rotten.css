@@ -1,11 +1,12 @@
 body{
     font-family: Arial;
+    overflow: hidden;
 }
 
 div#wrapper{
     height: auto;
     margin: 0 auto;
-    width: 1000px;
+    width: 100%;
 }
 
 #movie_image{
@@ -14,7 +15,7 @@ div#wrapper{
 
 div#movie_info_box{
     float: left;
-    width: 800px;
+    width: 100%;
     overflow-y: scroll;
     height: 100%;
 }
@@ -35,14 +36,18 @@ div.clearer{
 div.movie_item{
     position: relative;
     height: 187px;
-    background: lightblue;
-    margin-bottom: 10px;
-    padding: 5px 10px 10px 150px;
+    border-bottom: 3px solid #eef;
+    padding: 5px 10px 10px 160px;
+}
+
+div.movie_item.odd{
+    background: #F3F6FA;
 }
 
 .img_wrapper{
     left:0;
     top:0;
+    height: 200px;
     position: absolute !important;
     border: 1px solid #000;
     width: 145px;
@@ -66,16 +71,20 @@ div.movie_meta .content{
 
 #movie_head{
     display: none;
-    height: 40px;
-    background: lightskyblue;
-    width: 800px;
+    /*    height: 30px;*/
+    padding: 10px 0 25px 0;
+    background: #FAFAFA;
+    width: 100%;
+    font-weight: bold;
+    border-bottom: 4px solid #999;
 }
 
 .movie_head_item{
-    float: left;
+    /*    float: left;*/
+    display: inline;
     text-align: center;
-    
     font-size: 15px;
+    border-right: 1px solid #999;
 }
 
 .movie_btn{
