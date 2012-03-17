@@ -2,149 +2,26 @@
     <head>
         <?= Asset::CSS('reset.css'); ?>
         <?= Asset::CSS('rotten.css'); ?>
-        <? //= Asset::JS('uservoice.js'); ?>
+        <?= Asset::js('uservoice.js', array(), null, true); ?>
 
         <title><?= $title; ?></title>
 
-        <?= Asset::js('jquery.js'); ?>       
+        <?= Asset::js('jquery.js'); ?>   
         <script type="text/javascript">
             $('document').ready(function()
-            {
-                switch (<?= Input::get('view') != '' ? "'" . Input::get('view') . "'" : "'albumlist'"; ?>)
-                {
-                    case 'list':
-                       
-                        view_list();
-                        break;
-                    case 'albumlist':
-                        view_albumlist()
-                        break;
-                    case 'grid':
-                        view_grid();
-                        break;
-                    }
-                    
-                    // Highlight the movie_head_item that is currently being sorted
-                    $orderby = <?= Input::get('orderby') != '' ? "'" . Input::get('orderby') . "'" : "'title'"; ?>;
-                                        
-                    $('.movie_head_item.content.' + $orderby + ' a').css('background','#D6DAE0');
-                    
-                
-                
-                    // Hover effect of Add/Remove Button
-                    $('.img_wrapper').hover(function(){
-                        //                        alert('.img_wrapper div#' + (this.id) + '.movie_btn a');
-                        $('.img_wrapper div#' + (this.id) + '.movie_btn').css('display','block')
-                    }, function(){
-                        $('.movie_btn a').css('display','none')
-                    })
-                
-                    $('.button_link.remove').click(function(e)
-                    {
-                        // Prevent from navigating away from page
-                        e.preventDefault();
-                                    
-                        // Use Ajax call to interact with database
-                        $.ajax({
-                            url: this,
-                            success: function(){
-                            
-                            }
-                        })
-                    
-                        $('.movie_item#' + this.id).animate({
-                            height:0, width:0, opacity: .5
-                        }, 100, "linear", function(){
-                            $('.movie_item#' + this.id).css('display','none')
-                        } );
-                                    
-                    });
-                
-                
-                    $('a.view_btn').click(function(e){
-                        e.preventDefault();
-                    
-                    
-                        switch(this.id)
-                        {
-                            case 'list':
-                                view_list();
-                                break;
-                            
-                            case 'albumlist':
-                                view_albumlist();
-                            
-                                break;
-                            case 'grid':
-                                view_grid();
-                                break;
-                        }
-                    })
-                
-                    function view_list()
-                    {
-                        $('span.header').css('display','none');
-                        $('div.movie_item').css('padding','5px 5px 5px 50px');
-                            
-                        $('.movie_item').css('height','50px').css('margin-bottom','0px');
-                            
-                            
-                        $('div.content').css('float', 'left');
-                        $('div#movie_head').css('display', 'block');
-                        $('div.movie_item.odd').css('background', '#F3F6FA');
-                            
-                            
-                        $('.img_wrapper').css('height', '50px').css('width','40px');
-                        $('.movie_head_item.image').css('width', '40px').css('height','37px').css('background','#F3F6FA').css('text-indent','-9999');
-                        
-                        
-                        $('.content.title').css('width', '50%');
-                        $('.content.runtime').css('width', '10%').css('text-align','right');
-                        $('.content.year').css('width', '10%').css('text-align','right');
-                        $('.content.m_rating').css('width', '10%').css('text-align','right');
-                        $('.content.our_rating').css('width', '10%').css('text-align','right');
-                    }
-                
-                    function view_albumlist()
-                    {
-                        $('.img_wrapper').css('display','block').css('height', '200px').css('width','145px');
-                        $('span.header').css('display','inline');
-                        $('div.movie_item').css('padding','5px 10px 10px 150px');
-                        $('div.movie_item').css('width','100%');
-                        $('div.movie_item').css('float','none');
-                        $('.content').css('width', '100%');
-                        $('.movie_item').css('height','187px');
-                        $('div.content').css('display', 'block');
-                        $('div#movie_head').css('display', 'none');
-                        
-                        $('.content.title').css('width', '100%').css('display','inline');
-                        $('.content.runtime').css('width', '100%').css('text-align','left').css('padding-right','0px');
-                        $('.content.year').css('width', '100%').css('text-align','left').css('padding-right','0px');
-                        $('.content.m_rating').css('width', '100%').css('text-align','left').css('padding-right','0px');
-                        $('.content.our_rating').css('width', '100%').css('text-align','left').css('padding-right','0px');
-                    }
-                
-                    function view_grid()
-                    {
-                        $('.img_wrapper').css('display','block').css('height', '200px').css('width','145px');
-                        $('span.header').css('display','inline');
-                        $('.movie_item').css('margin-bottom','0px');
-                        $('div.content').css('display','none');
-                        $('div.movie_item').css('width','145px').css('height','202px').css('padding','0px').css('float','left');
-                        $('div#movie_head').css('display', 'none');
-                    }
-                });
-            
-    
+            {                 
+                // Highlight the movie_head_item that is currently being sorted
+                $orderby = <?= Input::get('orderby') != '' ? "'" . Input::get('orderby') . "'" : "'title'"; ?>;
+            });
         </script>
-
+        <?= Asset::js('logic.js', array(), null, true); ?>
     </head>
     <body>
         <div id="wrapper">
             <div id="top_box">
                 <div id="movie_form_box">
 
-                    <?= Form::open(array('action' => 'playground/apis/rotten/search/', 'method' => 'get')); ?>
+                    <?= Form::open(array('action' => 'playground/apis/rotten/search', 'method' => 'get')); ?>
                     <?= Form::label('Movie Title'); ?>
                     <?= Form::input('title'); ?>
                     <?= Form::submit(); ?>
@@ -152,26 +29,26 @@
                 </div>
                 <div id="page_controls">
                     <ul>
-                        <li><a href="../rotten/search">S</a></li>
-                        <li><a href="../rotten/viewed">V</a></li>
-                        <li><a href="../rotten/wishlist">W</a></li>
+                        <li><a href="search">S</a></li>
+                        <li><a href="viewed">V</a></li>
+                        <li><a href="wishlist">W</a></li>
                     </ul>
                 </div>
                 <div id="view_controls">
                     <ul>
-                        <li><a class="view_btn" id="list" href="#List">List</a></li>
-                        <li><a class="view_btn" id="albumlist" href="#AlbumList">Album List</a></li>
-                        <li><a class="view_btn" id="grid" href="#Grid">Grid</a></li>
+                        <li><a class="view_btn" id="list" href="#list">List</a></li>
+                        <li><a class="view_btn" id="albumlist" href="#albumlist">Album List</a></li>
+                        <li><a class="view_btn" id="grid" href="#grid">Grid</a></li>
                     </ul>
                 </div>
                 <div class="clearer"></div>
                 <div id="movie_head">
                     <div class="image movie_head_item content">Image</div>
-                    <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Title</a></div>
-                    <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Runtime</a></div>
-                    <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Year</a></div>
-                    <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
-                    <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Our Rating</a></div>
+                    <div class="title movie_head_item content"><a href="viewed?orderby=title&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>">Title</a></div>
+                    <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>">Runtime</a></div>
+                    <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>">Year</a></div>
+                    <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>">Rating</a></div>
+                    <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>">Our Rating</a></div>
                 </div>
             </div>
             <div id="movie_info_box">
@@ -183,11 +60,10 @@
                     {
                         ?>
                         <div class="movie_item <?= $odd == 'true' ? 'odd' : 'even'; ?>" id="<?= $m['ID']; ?>">
-
                             <div id="<?= $m['ID']; ?>" class="img_wrapper">
                                 <img id="<?= $m['ID']; ?>" height="100%" width="100%" src="<?= $m['image']; ?>"/>
                                 <div id="<?= $m['ID']; ?>" class="movie_btn">
-                                    <a class="button_link remove" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
+                                    <a id="<?= $m['ID'];?>" class="button_link background_link" href="hide_movie/<?= $m['ID']; ?>">Remove</a>
                                 </div>
                             </div>
                             <div class="content title"><span class="header title">Title: </span><?= $m['title']; ?></div>
@@ -195,7 +71,6 @@
                             <div class="content year"><span class="header year">Year: </span><?= $m['year']; ?></div>
                             <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m['m_rating']; ?></div>
                             <div class="clearer"></div>
-
                         </div>
                         <?php
                         // Toggle even/odd
@@ -206,7 +81,6 @@
                     }
                 }
                 ?>
-
             </div>
             <div class="clearer"></div>
         </div>
