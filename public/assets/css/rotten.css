@@ -27,7 +27,7 @@ div#top_box{
 }
 
 div#movie_info_box{
-    /*    float: left;*/
+    display: none;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -35,15 +35,10 @@ div#movie_info_box{
     border-top: 1px solid #999;
 }
 
-
-div.clearer{
-    clear:both;
-}
-
 #page_controls{
     position: absolute;
     top: 20px;
-    right: 108px;
+    right: 120px;
 }
 
 #page_controls ul li{
@@ -55,12 +50,13 @@ div.clearer{
 
 #page_controls ul li a{
     text-decoration: none;
+    text-align: center;
     padding: 5px 0px 4px 0px;
     color: #FFF;
     display: block;
     background: #999;
     height: 100%;
-    width: 30px;
+    width: 50px;
 }
 
 #page_controls ul li a:hover{
@@ -77,57 +73,50 @@ div.clearer{
 #view_controls ul li{
     display: block;
     float: left;
-    width: 20px;
-    height: 7px;
+    height: 21px;
+    width: 30px;
     background: #999;
-    padding: 7px 0 7px 7px;
+    /*    padding: 7px 0 7px 7px;*/
     border-right: 1px solid #EEE;
     text-indent: -9999px;
 }
 
+#view_controls ul li a{
+    height: 100%;
+    width: 100%;
+}
+
 #view_controls ul li a#list{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') no-repeat;
-    height: 8px;
-    width: 14px;
+    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -5px -4px no-repeat;
     display: block;
 }
 
 #view_controls ul li a#list:hover{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') 0px -7px no-repeat;
-    height: 8px;
-    width: 14px;
+    background: #EEE url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -5px -19px no-repeat;
     display: block;
     text-indent: -9999px;
 }
 
 #view_controls ul li a#albumlist{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -13px 0px no-repeat;
-    height: 8px;
-    width: 14px;
+    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -32px -4px no-repeat;
     display: block;
     text-indent: -9999px;
 }
 
 #view_controls ul li a#albumlist:hover{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -13px -7px no-repeat;
-    height: 8px;
-    width: 14px;
+    background: #EEE  url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -32px -19px no-repeat;
     display: block;
     text-indent: -9999px;
 }
 
 #view_controls ul li a#grid{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -28px 0px no-repeat;
-    height: 8px;
-    width: 14px;
+    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -58px -4px no-repeat;
     display: block;
     text-indent: -9999px;
 }
 
 #view_controls ul li a#grid:hover{
-    background: url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -28px -7px no-repeat;
-    height: 8px;
-    width: 14px;
+    background: #EEE  url('http://dev.ambooth.com/assets/img/movie_list_sprites.png') -58px -19px no-repeat;
     display: block;
     text-indent: -9999px;
 }
@@ -136,7 +125,7 @@ div.movie_item{
     position: relative;
     height: 187px;
     border-bottom: 3px solid #eef;
-    /*    padding: 5px 10px 10px 160px;*/
+/*        padding: 5px 10px 10px 160px;*/
 }
 
 div.movie_item.odd{
@@ -216,3 +205,5 @@ div.movie_meta .content{
     color: #FFF;
     padding: 4px 10px;
 }
+
+div.clearer{ clear:both; }
