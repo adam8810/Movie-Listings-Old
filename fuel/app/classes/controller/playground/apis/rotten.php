@@ -1,6 +1,9 @@
 <?php
 
+use \Fuel\Core;
 use Model\Playground\Apis\Rotten\Search;
+use Model\Playground\Apis\Rotten\Movie;
+use Model\Playground\Apis\Rotten\Sessions;
 use Fuel\Core\Input;
 
 class Controller_Playground_Apis_Rotten extends Controller {
@@ -15,7 +18,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         $data['title'] = 'Search Rotten Tomatoes';
         $data['movie'] = null;
 
-        return View::forge('playground/apis/rotten_search', $data);
+        return View::forge('playground/apis/list_view', $data);
     }
 
     public function action_search()
@@ -34,11 +37,13 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
         $data['title'] = 'Rotten Tomatoes';
 
+        $data['control_action'] = 'add';
 
-        return View::forge('playground/apis/rotten_search', $data);
+
+        return View::forge('playground/apis/list_view', $data);
     }
 
-    public function action_add_movie($id = null)
+    public function action_Add_movie($id = null)
     {
         $title = Input::get('title');
         $image = Input::get('img');
@@ -81,15 +86,37 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
         if ($orderby == '')
             $orderby = 'title';
-        
+
         if ($method == '')
             $method = 'ASC';
-        
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, $method)->execute();
+
+        $result = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating', 'our_rating')->from('movies')->where('viewed', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, $method)->execute();
         $data['title'] = 'Viewed List';
+        $data['movie'] = array();
+        $data['control_action'] = 'remove';
+
+        foreach ($result as $r)
+        {
+            $movie = new Movie();
+
+            $movie->title = $r['title'];
+            $movie->runtime = $r['runtime'];
+            $movie->id = $r['ID'];
+            $movie->MID = $r['MID'];
+            $movie->year = $r['year'];
+            $movie->img = $r['image'];
+            $movie->our_rating = $r['our_rating'];
+            $movie->m_rating = $r['m_rating'];
+            $movie->r_a_score = null;
+            $movie->r_c_score = null;
+
+            array_push($data['movie'], $movie);
+        }
 
 
-        return View::forge('playground/apis/rotten_viewed', $data, false);
+
+
+        return View::forge('playground/apis/list_view', $data, false);
     }
 
     public function action_wishlist($user_id = null)
@@ -100,8 +127,10 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
         $data['title'] = 'Wishlist';
 
+        $data['control_action'] = 'remove';
 
-        return View::forge('playground/apis/rotten_viewed', $data, false);
+
+        return View::forge('playground/apis/list_view', $data, false);
     }
 
     public function action_remove_movie($ID)
@@ -118,5 +147,16 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         DB::update('movies')->value('visible', '1')->where('ID', 'like', $ID)->execute();
     }
-
+    
+    
+    // Following functions for session mgmt
+    public function action_setusername()
+    {
+        Sessions::set_username();
+    }
+    
+    public function action_getusername()
+    {
+        Sessions::get_username();
+    }
 }
