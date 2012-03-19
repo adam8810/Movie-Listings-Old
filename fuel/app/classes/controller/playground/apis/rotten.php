@@ -1,6 +1,7 @@
 <?php
 
 use \Fuel\Core;
+use \Fuel\Core\Session;
 use Model\Playground\Apis\Rotten\Search;
 use Model\Playground\Apis\Rotten\Movie;
 use Model\Playground\Apis\Rotten\Sessions;
@@ -10,7 +11,14 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     function before()
     {
-        $this->title = Input::GET('title');
+        if (Input::GET('title') != '')
+        {
+            $this->title = Input::GET('title');
+        }
+        else if (Sessions::get_search() != '')
+        {
+            $this->title = Sessions::get_search();
+        }
     }
 
     function action_index()
@@ -147,16 +155,16 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         DB::update('movies')->value('visible', '1')->where('ID', 'like', $ID)->execute();
     }
-    
-    
+
     // Following functions for session mgmt
     public function action_setusername()
     {
         Sessions::set_username();
     }
-    
+
     public function action_getusername()
     {
         Sessions::get_username();
     }
+
 }
