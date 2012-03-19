@@ -81,7 +81,7 @@
                         else
                             $temp_release_theater = 'NA';
 
-                        $add_link_1 = 'add_movie/' . $m->id . '/?title=' . urlencode($m->title) . '&year=' . $m->year . '&img=' . urlencode($m->img) . '&m_rating=' . $m->m_rating . '&viewed=';
+                        $add_link_1 = $control_action . '_movie/' . $m->id . '/?title=' . urlencode($m->title) . '&year=' . $m->year . '&img=' . urlencode($m->img) . '&m_rating=' . $m->m_rating . '&viewed=';
                         $add_link_2 = '&r_a_rating=' . $temp_r_a_rating . '&r_c_rating=' . $temp_r_c_rating . '&r_a_score=' . $m->r_a_score . '&r_c_score=' . $m->r_c_score . '&runtime=' . $m->runtime . '&release_dvd=' . $temp_release_dvd . '&release_theater=' . $temp_release_theater;
 
                         $add_link_wishlist = $add_link_1 . 0 . $add_link_2;
@@ -92,7 +92,7 @@
                             <div id="<?= $m->id; ?>" class="img_wrapper">
                                 <img id="<?= $m->id; ?>" height="100%" width="100%" src="<?= $m->img; ?>"/>
                                 <div id="<?= $m->id; ?>" class="movie_btn">
-                                    <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_viewed; ?>">Add</a>
+                                    <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_viewed; ?>"><?= $control_action; ?></a>
                                 </div>
                             </div>    
 
@@ -100,7 +100,21 @@
                             <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr'); ?> and <?= $m->runtime % 60; ?> min</div>
                             <div class="content year"><span class="header year">Year: </span><?= $m->year; ?></div>
                             <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m->m_rating; ?></div>
-                            <div class="content wishlist"><a class="background_link" href="<?= $add_link_wishlist; ?>">Add to Wish List!</a></div>
+                            <?php
+                            if (isset($m->our_rating))
+                            {
+                                ?>
+                            <div class="content our_rating"><span class="header our_rating">Our Rating: </span><?= $m->our_rating; ?></div>
+                            <?php
+                            }
+                            
+                            if ($control_action == 'add')
+                            {
+                                ?>
+                                <div class="content wishlist"><a class="background_link" href="<?= $add_link_wishlist; ?>">Add to Wish List!</a></div>
+                                <?php
+                            }
+                            ?>
                             <div class="clearer"></div>
 
 
