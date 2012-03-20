@@ -1,7 +1,6 @@
 <?php
 
 use \Fuel\Core;
-use \Fuel\Core\Session;
 use Model\Playground\Apis\Rotten\Search;
 use Model\Playground\Apis\Rotten\Movie;
 use Model\Playground\Apis\Rotten\Sessions;
