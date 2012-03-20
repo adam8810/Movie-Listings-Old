@@ -125,7 +125,7 @@ div.movie_item{
     position: relative;
     height: 187px;
     border-bottom: 3px solid #eef;
-/*        padding: 5px 10px 10px 160px;*/
+    /*        padding: 5px 10px 10px 160px;*/
 }
 
 div.movie_item.odd{
@@ -208,6 +208,27 @@ div.movie_meta .content{
 
 .add_w_rating ul li{
     display: inline;
+    padding: 2px;
+}
+
+.no_star{
+    width: 20px;
+    background: url('../img/star_sprite.png') -26px 0 no-repeat;
+    height: 26px;
+    width: 27px;
+    display: block;
+    float: left;
+    text-indent: -9999px;
+}
+
+.full_star{
+    background: url('../img/star_sprite.png') -52px 0px no-repeat;
+    height: 26px;
+    width: 27px;
+    display: block;
+    float: left;
+    text-indent: -9999px;
+    width: 20px;
 }
 
 div.clearer{ clear:both; }
