@@ -1,6 +1,7 @@
 <?php
 
 use \Fuel\Core;
+use \Fuel\Core\Session;
 use Model\Playground\Apis\Rotten\Search;
 use Model\Playground\Apis\Rotten\Movie;
 use Model\Playground\Apis\Rotten\Sessions;
@@ -12,17 +13,22 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         if (Input::GET('title') != '')
         {
+            Sessions::set_search(Input::GET('title'));
             $this->title = Input::GET('title');
         }
         else if (Sessions::get_search() != '')
         {
             $this->title = Sessions::get_search();
         }
+        else
+        {
+            $this->title = "";
+        }
     }
 
     function action_index()
     {
-        $data['title'] = 'Search Rotten Tomatoes';
+        $data['page_title'] = 'Search Rotten Tomatoes';
         $data['movie'] = null;
 
         return View::forge('playground/apis/list_view', $data);
@@ -42,7 +48,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         else
             $data['movie'] = null;
 
-        $data['title'] = 'Rotten Tomatoes';
+        $data['page_title'] = 'Rotten Tomatoes';
 
         $data['control_action'] = 'add';
 
@@ -55,6 +61,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         $title = Input::get('title');
         $image = Input::get('img');
         $m_rating = Input::get('m_rating');
+        $our_rating = Input::get('our_rating');
         $year = Input::get('year');
         $viewed = Input::get('viewed');
         $r_a_rating = Input::get('r_a_rating');
@@ -69,6 +76,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
             'title' => $title,
             'image' => $image,
             'm_rating' => $m_rating,
+            'our_rating' => $our_rating,
             'MID' => $id,
             'year' => $year,
             'viewed' => $viewed,
@@ -98,7 +106,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
             $method = 'ASC';
 
         $result = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating', 'our_rating')->from('movies')->where('viewed', 'like', '1')->and_where('visible', 'like', '1')->order_by($orderby, $method)->execute();
-        $data['title'] = 'Viewed List';
+        $data['page_title'] = 'Viewed List';
         $data['movie'] = array();
         $data['control_action'] = 'remove';
 
@@ -132,7 +140,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
         $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '0')->and_where('visible', 'like', '1')->execute();
 
-        $data['title'] = 'Wishlist';
+        $data['page_title'] = 'Wishlist';
 
         $data['control_action'] = 'remove';
 
