@@ -149,7 +149,7 @@ div.movie_meta{
 
 span.header{
     float:left;
-    width: 100px;
+    width: 140px;
     font-weight: bold;
 }
 
@@ -204,6 +204,10 @@ div.movie_meta .content{
     border: 1px solid #FFF;
     color: #FFF;
     padding: 4px 10px;
+}
+
+.add_w_rating ul li{
+    display: inline;
 }
 
 div.clearer{ clear:both; }
