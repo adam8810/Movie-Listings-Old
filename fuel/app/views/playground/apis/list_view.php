@@ -104,13 +104,25 @@
                             if (isset($m->our_rating))
                             {
                                 ?>
-                            <div class="content our_rating"><span class="header our_rating">Our Rating: </span><?= $m->our_rating; ?></div>
-                            <?php
+                                <div class="content our_rating"><span class="header our_rating">Our Rating: </span><?= $m->our_rating; ?></div>
+
+                                <?php
                             }
+                            ?>
                             
+                            <?php
                             if ($control_action == 'add')
                             {
                                 ?>
+                                <div class="content add_w_rating"><span class="header">Add with Rating: </span>
+                                <ul>
+                                    <li><a hef="#1">1</a></li>
+                                    <li><a hef="#2">2</a></li>
+                                    <li><a hef="#3">3</a></li>
+                                    <li><a hef="#4">4</a></li>
+                                    <li><a hef="#5">5</a></li>
+                                </ul>
+                            </div>
                                 <div class="content wishlist"><a class="background_link" href="<?= $add_link_wishlist; ?>">Add to Wish List!</a></div>
                                 <?php
                             }
