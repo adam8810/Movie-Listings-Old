@@ -13,7 +13,7 @@
             });
         </script>
         <?= Asset::js('logic.js', array(), null, true); ?>
-        <title><?= $title; ?></title>
+        <title><?= $page_title; ?></title>
     </head>
     <body>
         <div id="wrapper">
@@ -109,20 +109,21 @@
                                 <?php
                             }
                             ?>
-                            
+
                             <?php
                             if ($control_action == 'add')
                             {
                                 ?>
                                 <div class="content add_w_rating"><span class="header">Add with Rating: </span>
-                                <ul>
-                                    <li><a hef="#1">1</a></li>
-                                    <li><a hef="#2">2</a></li>
-                                    <li><a hef="#3">3</a></li>
-                                    <li><a hef="#4">4</a></li>
-                                    <li><a hef="#5">5</a></li>
-                                </ul>
-                            </div>
+                                    <ul>
+                                        <li><a class="background_link no_star 1star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=1'; ?>">1</a></li>
+                                        <li><a class="background_link no_star 2star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=2'; ?>">2</a></li>
+                                        <li><a class="background_link no_star 3star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=3'; ?>">3</a></li>
+                                        <li><a class="background_link no_star 4star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=4'; ?>">4</a></li>
+                                        <li><a class="background_link no_star 5star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=5'; ?>">5</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearer"></div>
                                 <div class="content wishlist"><a class="background_link" href="<?= $add_link_wishlist; ?>">Add to Wish List!</a></div>
                                 <?php
                             }
