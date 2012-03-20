@@ -92,7 +92,28 @@ $('document').ready(function()
                     view_grid();
                     break;
             }
+        });
+        
+        $('a.background_link').click(function(e)
+        {
+            e.preventDefault();
+            
+            $.ajax({
+                url: this,
+                success: function(){
+                            
+                }
+            });            
+        });
+        
+        // Stars
+        $('.5star').hover(function(){
+            $('a#'+ this.id + '.background_link.1star').css('display', 'none');
+            $('a#'+ this.id + '.1star').addClass('full_star');
+        }, function(){
+            $('#1star').removeClass('full_star');
         })
+        
                 
         function view_list()
         {
