@@ -194,7 +194,7 @@ div.movie_meta .content{
     position: absolute;
     top: 0px;
     padding: 5px;
-    height: 60%;
+    height: 95%;
     width: 136px;
     opacity: .8;
 }
@@ -209,7 +209,7 @@ div.movie_meta .content{
     width: 100%;
     text-align: center;
     border-top: 1px solid green;
-    opacity: .8;
+    opacity: 1;
 }
 
 .button_link{
