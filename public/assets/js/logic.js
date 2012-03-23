@@ -4,7 +4,33 @@ $('document').ready(function()
                
         $.get('get_view', function(view){
             
-            if(view != '') // If the view session variable isn't set, default to albumlist()'
+            if(window.location.hash)
+            {   
+                switch ($hash)
+                {
+                    case '#list':
+                         $.ajax({
+                        url: 'set_view/list'
+                    });
+                        view_list();              
+                    
+                        break;
+                    case '#albumlist':
+                         $.ajax({
+                        url: 'set_view/albumlist'
+                    });
+                        view_albumlist();
+                    
+                        break;
+                    case '#grid':
+                         $.ajax({
+                        url: 'set_view/grid'
+                    });
+                        view_grid();
+                        break;
+                }
+            }
+            else if(view != '') // If the view session variable isn't set, default to albumlist()'
             {
                 switch (view[0])
                 {
@@ -26,26 +52,7 @@ $('document').ready(function()
                 view_albumlist();
             }
         });
-        
-        
-        if(window.location.hash)
-        {   
-            switch ($hash)
-            {
-                case '#list':
-                    view_list();              
-                    
-                    break;
-                case '#albumlist':
-                    view_albumlist();
-                    
-                    break;
-                case '#grid':
-                    view_grid();
-                    break;
-            }
-        }
-        
+                
         $('.movie_head_item.content.' + $orderby + ' a').css('background','#D6DAE0');
            
         // Hover effect of Add/Remove Button
@@ -58,30 +65,13 @@ $('document').ready(function()
             
         })
                 
-        $('.button_link').click(function(e)
-        {                    
-            $('.movie_item#' + this.id).animate({
-                height:0, 
-                width:0, 
-                opacity: .5
-            }, 100, "linear", function(){
-                $('.movie_item#' + this.id).css('display','none')
-            } );
-                                    
-        });
-        
-        $('.button_link.remove').click(function(e)
+        $('.transition_out').click(function(e)
         {
-            // Prevent from navigating away from page
-            e.preventDefault();
-                        
-            // Use Ajax call to interact with database
-            $.ajax({
-                url: this,
-                success: function(){
-                            
-                }
-            })
+            $('.movie_item#' + this.id).animate({
+                width:'0px'
+            },'slow');
+            
+        /* old
             $('.movie_item#' + this.id).animate({
                 height:0, 
                 width:0, 
@@ -89,6 +79,8 @@ $('document').ready(function()
             }, 100, "linear", function(){
                 $('.movie_item#' + this.id).css('display','none')
             } );
+            
+            */
                                     
         });
                 
