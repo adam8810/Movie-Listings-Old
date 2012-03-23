@@ -15,7 +15,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         {
             Sessions::set_search(Input::GET('title'));
             $this->title = Input::GET('title');
-            echo 'get = ' . $this->title;
+            echo 'get = ' . $this->title.', session = '. Sessions::get_search();
         }
         else if (Sessions::get_search() != '')
         {
@@ -61,7 +61,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         return View::forge('playground/apis/list_view', $data);
     }
 
-    public function action_Add_movie($id = null)
+    public function action_Add_movie($movie_id = null)
     {
         $title = Input::get('title');
         $image = Input::get('img');
@@ -82,7 +82,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
             'image' => $image,
             'm_rating' => $m_rating,
             'our_rating' => $our_rating,
-            'MID' => $id,
+            'MID' => $movie_id,
             'year' => $year,
             'viewed' => $viewed,
             'r_a_rating' => $r_a_rating,
