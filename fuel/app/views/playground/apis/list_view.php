@@ -18,6 +18,7 @@
     <body>
         <div id="wrapper">
             <div id="top_box">
+                <h2><?= $page_title; ?></h2>
                 <div id="movie_form_box">
 
                     <?= Form::open(array('action' => 'playground/apis/rotten/search', 'method' => 'get')); ?>
@@ -47,7 +48,7 @@
                     <div class="runtime movie_head_item content"><a href="viewed?orderby=runtime&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Runtime</a></div>
                     <div class="year movie_head_item content"><a href="viewed?orderby=year&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Year</a></div>
                     <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
-                    <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Our Rating</a></div>
+                    <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Add With Rating</a></div>
                 </div>
             </div>
             <div id="movie_info_box">
@@ -90,14 +91,33 @@
                         <div class="movie_item <?= $odd == 'true' ? 'odd' : 'even'; ?>" id="<?= $m->id; ?>">
 
                             <div id="<?= $m->id; ?>" class="img_wrapper">
+                                <div class="movie_info"><?= $m->title . '<br/>' . (floor($m->runtime / 60) > 1 ? (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr' ) : floor($m->runtime / 60) . ' hr');
+                echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : ''; ?></div>
+
                                 <img id="<?= $m->id; ?>" height="100%" width="100%" src="<?= $m->img; ?>"/>
                                 <div id="<?= $m->id; ?>" class="movie_btn">
-                                    <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_viewed; ?>"><?= $control_action; ?></a>
+                                    <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_viewed; ?>">
+                                    <?php echo $control_action == 'add' ? 'Add to Wishlist' : 'Remove'; ?>
+                                    </a>
+                                    <?php if ($control_action == 'add')
+                                    {
+                                        ?>
+                                        <div class="stars">
+                                            <ul>
+                                                <li><a class="background_link no_star 1star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=1'; ?>">1</a></li>
+                                                <li><a class="background_link no_star 2star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=2'; ?>">2</a></li>
+                                                <li><a class="background_link no_star 3star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=3'; ?>">3</a></li>
+                                                <li><a class="background_link no_star 4star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=4'; ?>">4</a></li>
+                                                <li><a class="background_link no_star 5star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=5'; ?>">5</a></li>
+                                            </ul>
+                                        </div>
+        <?php } ?>
                                 </div>
                             </div>    
 
                             <div class="content title"><span class="header title">Title: </span><?= $m->title; ?></div>
-                            <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr'); ?> and <?= $m->runtime % 60; ?> min</div>
+                            <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m->runtime / 60) > 1 ? (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr' ) : floor($m->runtime / 60) . ' hr');
+        echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : ''; ?></div>
                             <div class="content year"><span class="header year">Year: </span><?= $m->year; ?></div>
                             <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m->m_rating; ?></div>
                             <?php
@@ -116,18 +136,19 @@
                                 ?>
                                 <div class="content add_w_rating"><span class="header">Add with Rating: </span>
                                     <ul>
-                                        <li><a class="background_link no_star 1star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=1'; ?>">1</a></li>
-                                        <li><a class="background_link no_star 2star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=2'; ?>">2</a></li>
-                                        <li><a class="background_link no_star 3star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=3'; ?>">3</a></li>
-                                        <li><a class="background_link no_star 4star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=4'; ?>">4</a></li>
-                                        <li><a class="background_link no_star 5star" id="<?= $m->id;?>" href="<?= $add_link_viewed . '&our_rating=5'; ?>">5</a></li>
+                                        <li><a class="background_link no_star 1star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=1'; ?>">1</a></li>
+                                        <li><a class="background_link no_star 2star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=2'; ?>">2</a></li>
+                                        <li><a class="background_link no_star 3star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=3'; ?>">3</a></li>
+                                        <li><a class="background_link no_star 4star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=4'; ?>">4</a></li>
+                                        <li><a class="background_link no_star 5star" id="<?= $m->id; ?>" href="<?= $add_link_viewed . '&our_rating=5'; ?>">5</a></li>
                                     </ul>
                                 </div>
+                                <div class="wishlist">Wishlist</div>
                                 <div class="clearer"></div>
                                 <div class="content wishlist"><a class="background_link" href="<?= $add_link_wishlist; ?>">Add to Wish List!</a></div>
-                                <?php
-                            }
-                            ?>
+            <?php
+        }
+        ?>
                             <div class="clearer"></div>
 
 
