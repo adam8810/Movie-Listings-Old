@@ -50,7 +50,7 @@
                     <div class="m_rating movie_head_item content"><a href="viewed?orderby=m_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Rating</a></div>
                     <div class="our_rating movie_head_item content"><a href="viewed?orderby=our_rating&method=<?= Input::get('method') == 'ASC' ? 'DESC' : 'ASC'; ?>&view=<?= Input::get('view'); ?>">Add With Rating</a></div>
                 </div>
-                <div id="searching_for"><?= 'Showing results for: "'. $search_query.'"';?></div>
+                <div id="searching_for"><?= (isset($search_query) && $search_query != '') ? 'Showing results for: "'. $search_query.'"' : '';?></div>
             </div>
             <div id="movie_info_box">
                 <?php
