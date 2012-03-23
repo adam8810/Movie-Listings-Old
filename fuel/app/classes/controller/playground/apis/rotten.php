@@ -31,12 +31,10 @@ class Controller_Playground_Apis_Rotten extends Controller {
         {
             Sessions::set_search(Input::GET('title'));
             $this->title = Input::GET('title');
-            echo 'get = ' . $this->title.', session = '. Sessions::get_search();
         }
         else if (Sessions::get_search() != '')
         {
             $this->title = Sessions::get_search();
-            echo 'session = '. $this->title;
         }
         else
         {
@@ -207,5 +205,27 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         Sessions::get_username();
     }
-
+    
+    public function action_set_view($view)
+    {
+        switch($view)
+        {
+            case 'list':
+                Sessions::set_view('list');
+                break;
+        
+            case 'albumList':
+                Sessions::set_view('albumlist');
+                break;
+        
+            case 'grid':
+                Sessions::set_view('grid');
+                break;
+        }
+    }
+    
+    public function action_get_view()
+    {
+        echo Sessions::get_view();
+    }
 }
