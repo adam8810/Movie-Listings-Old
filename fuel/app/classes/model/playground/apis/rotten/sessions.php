@@ -32,7 +32,7 @@ class Sessions extends \Model {
                 Session::set('view', 'list');
                 break;
             case 'albumList':
-                Session::set('view', 'albumView');
+                Session::set('view', 'albumlist');
                 break;
             case 'grid':
                 Session::set('view', 'grid');
