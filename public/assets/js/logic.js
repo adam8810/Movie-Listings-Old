@@ -151,11 +151,11 @@ $('document').ready(function()
             $('.movie_head_item.image').css('width', '40px').css('height','37px').css('background','#F3F6FA').css('text-indent','-9999');
                         
                         
-            $('.content.title').css('width', '50%');
-            $('.content.runtime').css('width', '10%').css('text-align','right');
-            $('.content.year').css('width', '10%').css('text-align','right');
-            $('.content.m_rating').css('width', '10%').css('text-align','right');
-            $('.content.our_rating').css('width', '10%').css('text-align','right');
+            $('.content.title').css('width', '50%').css('display','inline');
+            $('.content.runtime').css('width', '10%').css('text-align','right').css('display','block');
+            $('.content.year').css('width', '10%').css('text-align','right').css('display','block');
+            $('.content.m_rating').css('width', '10%').css('text-align','right').css('display','block');
+            $('.content.our_rating').css('width', '10%').css('text-align','right').css('display','block');
         }
                 
         function view_albumlist()
