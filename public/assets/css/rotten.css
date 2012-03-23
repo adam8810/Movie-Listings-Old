@@ -208,11 +208,11 @@ div.movie_meta .content{
     padding-bottom: 10px;
     width: 100%;
     text-align: center;
-    border-top: 1px solid green;
+    border-top: 1px solid #278DFF;
     opacity: 1;
 }
 
-.button_link{
+.transition_out{
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
