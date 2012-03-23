@@ -24,4 +24,25 @@ class Sessions extends \Model {
             return false;
     }
 
+    public static function set_view($layout)
+    {
+        switch ($layout)
+        {
+            case 'list':
+                Session::set('view', 'list');
+                break;
+            case 'albumList':
+                Session::set('view', 'albumView');
+                break;
+            case 'grid':
+                Session::set('view', 'grid');
+                break;
+        }
+    }
+    
+    public static function get_view()
+    {
+        return Session::get('view');
+    }
+
 }
