@@ -11,8 +11,16 @@ div#wrapper{
 }
 
 div#top_box{
-    height: 85px;
+    height: 25%;
+    min-height: 120px;
+    min-width: 600px;
     position: relative;
+}
+
+div#top_box div#searching_for{
+    position: absolute;
+    bottom: 40px;
+    left: 5px;
 }
 
 #movie_form_box{
