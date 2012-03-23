@@ -15,10 +15,12 @@ class Controller_Playground_Apis_Rotten extends Controller {
         {
             Sessions::set_search(Input::GET('title'));
             $this->title = Input::GET('title');
+            echo 'get = ' . $this->title;
         }
         else if (Sessions::get_search() != '')
         {
             $this->title = Sessions::get_search();
+            echo 'session = '. $this->title;
         }
         else
         {
@@ -28,7 +30,10 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     function action_index()
     {
-        $data['page_title'] = 'Search Rotten Tomatoes';
+        $data['page_title'] = 'Home';
+
+        $box_office = Search::box_office_listing();
+
         $data['movie'] = null;
 
         return View::forge('playground/apis/list_view', $data);
@@ -48,7 +53,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         else
             $data['movie'] = null;
 
-        $data['page_title'] = 'Rotten Tomatoes';
+        $data['page_title'] = 'Search';
 
         $data['control_action'] = 'add';
 
@@ -136,13 +141,40 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     public function action_wishlist($user_id = null)
     {
+        // Get GET data
+        $orderby = Input::get('orderby');
+        $method = Input::get('method');
+
         $data = array();
 
-        $data['movie'] = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating')->from('movies')->where('viewed', 'like', '0')->and_where('visible', 'like', '1')->execute();
+        if ($orderby == '')
+            $orderby = 'title';
 
-        $data['page_title'] = 'Wishlist';
+        if ($method == '')
+            $method = 'ASC';
 
+        $result = DB::select('title', 'runtime', 'ID', 'MID', 'year', 'image', 'm_rating', 'our_rating')->from('movies')->where('viewed', 'like', '0')->and_where('visible', 'like', '1')->order_by($orderby, $method)->execute();
+        $data['page_title'] = 'Viewed List';
+        $data['movie'] = array();
         $data['control_action'] = 'remove';
+
+        foreach ($result as $r)
+        {
+            $movie = new Movie();
+
+            $movie->title = $r['title'];
+            $movie->runtime = $r['runtime'];
+            $movie->id = $r['ID'];
+            $movie->MID = $r['MID'];
+            $movie->year = $r['year'];
+            $movie->img = $r['image'];
+            $movie->our_rating = $r['our_rating'];
+            $movie->m_rating = $r['m_rating'];
+            $movie->r_a_score = null;
+            $movie->r_c_score = null;
+
+            array_push($data['movie'], $movie);
+        }
 
 
         return View::forge('playground/apis/list_view', $data, false);
