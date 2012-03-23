@@ -40,7 +40,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
         {
             $this->title = "";
         }
-        
+
         $data = array();
 
         if ($this->title != "")
@@ -54,6 +54,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
             $data['movie'] = null;
 
         $data['page_title'] = 'Search';
+        $data['search_query'] = Sessions::get_search();
 
         $data['control_action'] = 'add';
 
@@ -205,27 +206,28 @@ class Controller_Playground_Apis_Rotten extends Controller {
     {
         Sessions::get_username();
     }
-    
+
     public function action_set_view($view)
     {
-        switch($view)
+        switch ($view)
         {
             case 'list':
                 Sessions::set_view('list');
                 break;
-        
+
             case 'albumList':
                 Sessions::set_view('albumlist');
                 break;
-        
+
             case 'grid':
                 Sessions::set_view('grid');
                 break;
         }
     }
-    
+
     public function action_get_view()
     {
         echo Sessions::get_view();
     }
+
 }
