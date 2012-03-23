@@ -11,8 +11,7 @@ div#wrapper{
 }
 
 div#top_box{
-    height: 25%;
-    min-height: 120px;
+    height: 100px;
     min-width: 600px;
     position: relative;
 }
