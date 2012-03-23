@@ -1,25 +1,51 @@
 $('document').ready(function()
     {
         var $hash = window.location.hash.substring();
-        
-        if(!window.location.hash)
-        {
-            $hash = '#albumlist';
-        }
-            
-        switch ($hash)
-        {
-            case '#list':
-                view_list();
-                break;
-            case '#albumlist':
-                view_albumlist();
-                break;
-            case '#grid':
-                view_grid();
-                break;
-        }
                
+        $.get('get_view', function(view){
+            
+            if(view != '') // If the view session variable isn't set, default to albumlist()'
+            {
+                switch (view[0])
+                {
+                    case 'l':
+                        view_list();              
+                    
+                        break;
+                    case 'a':
+                        view_albumlist();
+                    
+                        break;
+                    case 'g':
+                        view_grid();
+                        break;
+                }
+            }
+            else
+            {
+                view_albumlist();
+            }
+        });
+        
+        
+        if(window.location.hash)
+        {   
+            switch ($hash)
+            {
+                case '#list':
+                    view_list();              
+                    
+                    break;
+                case '#albumlist':
+                    view_albumlist();
+                    
+                    break;
+                case '#grid':
+                    view_grid();
+                    break;
+            }
+        }
+        
         $('.movie_head_item.content.' + $orderby + ' a').css('background','#D6DAE0');
            
         // Hover effect of Add/Remove Button
@@ -67,20 +93,28 @@ $('document').ready(function()
         });
                 
         $('a.view_btn').click(function(e){
-            //            e.preventDefault();
-                    
+            e.preventDefault();                    
                     
             switch(this.id)
             {
                 case 'list':
+                    $.ajax({
+                        url: 'set_view/list'
+                    });
                     view_list();
                     break;
                             
                 case 'albumlist':
+                    $.ajax({
+                        url: 'set_view/albumlist'
+                    });
                     view_albumlist();
                             
                     break;
                 case 'grid':
+                    $.ajax({
+                        url: 'set_view/grid'
+                    });
                     view_grid();
                     break;
             }
