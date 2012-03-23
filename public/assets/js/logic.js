@@ -24,11 +24,12 @@ $('document').ready(function()
            
         // Hover effect of Add/Remove Button
         $('.img_wrapper').hover(function(){ // Hover on
-            $('#' + this.id + ' .movie_btn').slideDown(100).css('display','block');
-            $('#' + this.id + ' .movie_info').slideUp(100).css('display','block');
+            $('#' + this.id + ' .movie_info').slideDown('fast').css('display','block');
+            $('#' + this.id + ' .movie_btn').slideDown(200).css('display','block');
         }, function(){ // Off
-            $('#' + this.id + ' .movie_btn').slideUp(100)
-            $('#' + this.id + ' .movie_info').slideDown(100).css('display','none')
+            $('#' + this.id + ' .movie_info').slideUp(90)
+            $('#' + this.id + ' .movie_btn').slideUp(190)
+            
         })
                 
         $('.button_link').click(function(e)
