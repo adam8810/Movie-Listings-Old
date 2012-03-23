@@ -19,28 +19,30 @@ $('document').ready(function()
                 view_grid();
                 break;
         }
-        
+               
         $('.movie_head_item.content.' + $orderby + ' a').css('background','#D6DAE0');
            
         // Hover effect of Add/Remove Button
-        $('.img_wrapper').hover(function(){
-            $('#' + this.id +' .movie_btn').css('display','block')
-        }, function(){
-            $('#' + this.id +' .movie_btn').css('display','none')
+        $('.img_wrapper').hover(function(){ // Hover on
+            $('#' + this.id + ' .movie_btn').slideDown(100).css('display','block');
+            $('#' + this.id + ' .movie_info').slideUp(100).css('display','block');
+        }, function(){ // Off
+            $('#' + this.id + ' .movie_btn').slideUp(100)
+            $('#' + this.id + ' .movie_info').slideDown(100).css('display','none')
         })
                 
         $('.button_link').click(function(e)
         {
             // Prevent from navigating away from page
-            e.preventDefault();
-                                    
-            // Use Ajax call to interact with database
-            $.ajax({
-                url: this,
-                success: function(){
-                            
-                }
-            })
+//            e.preventDefault();
+//                                    
+//            // Use Ajax call to interact with database
+//            $.ajax({
+//                url: this,
+//                success: function(){
+//                            
+//                }
+//            })
                     
             $('.movie_item#' + this.id).animate({
                 height:0, 
@@ -121,7 +123,8 @@ $('document').ready(function()
             $('span.header').css('display','none');
             $('div.movie_item').css('padding','5px 5px 5px 50px');
                             
-            $('.movie_item').css('height','50px').css('margin-bottom','0px');
+            $('div#movie_head').css('display', 'block');
+            $('.movie_item').css('height','50px').css('width','100%').css('margin-bottom','0px');
                             
             $('div.content').css('float', 'left');
             $('div#movie_head').css('display', 'block');
@@ -144,11 +147,8 @@ $('document').ready(function()
             $('div#movie_info_box').css('display','block');
             $('.img_wrapper').css('display','block').css('height', '200px').css('width','145px');
             $('span.header').css('display','inline');
-            $('div.movie_item').css('padding','5px 10px 10px 150px');
-            $('div.movie_item').css('width','100%');
-            $('div.movie_item').css('float','none');
+            $('div.movie_item').css('padding','5px 10px 10px 150px').css('float','none').css('width','100%').css('height','187px');
             $('.content').css('width', '100%');
-            $('.movie_item').css('height','187px');
             $('div.content').css('display', 'block');
             $('div#movie_head').css('display', 'none');
                         
