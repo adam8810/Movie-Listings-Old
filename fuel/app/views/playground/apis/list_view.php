@@ -52,8 +52,6 @@
                 </div>
             </div>
             <div id="movie_info_box">
-
-
                 <?php
                 if ($movie != null)
                 {
@@ -92,14 +90,16 @@
 
                             <div id="<?= $m->id; ?>" class="img_wrapper">
                                 <div class="movie_info"><?= $m->title . '<br/>' . (floor($m->runtime / 60) > 1 ? (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr' ) : floor($m->runtime / 60) . ' hr');
-                echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : ''; ?></div>
+                echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : '';
+                        ?></div>
 
                                 <img id="<?= $m->id; ?>" height="100%" width="100%" src="<?= $m->img; ?>"/>
                                 <div id="<?= $m->id; ?>" class="movie_btn">
                                     <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_viewed; ?>">
                                     <?php echo $control_action == 'add' ? 'Add to Wishlist' : 'Remove'; ?>
                                     </a>
-                                    <?php if ($control_action == 'add')
+                                    <?php
+                                    if ($control_action == 'add')
                                     {
                                         ?>
                                         <div class="stars">
@@ -117,7 +117,8 @@
 
                             <div class="content title"><span class="header title">Title: </span><?= $m->title; ?></div>
                             <div class="content runtime"><span class="header runtime">Runtime: </span><?= (floor($m->runtime / 60) > 1 ? (floor($m->runtime / 60) > 1 ? floor($m->runtime / 60) . ' hrs' : floor($m->runtime / 60) . ' hr' ) : floor($m->runtime / 60) . ' hr');
-        echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : ''; ?></div>
+                        echo $m->runtime % 60 > 1 ? ', ' . $m->runtime % 60 . ' min' : '';
+                        ?></div>
                             <div class="content year"><span class="header year">Year: </span><?= $m->year; ?></div>
                             <div class="content m_rating"><span class="header m_rating">Rating: </span><?= $m->m_rating; ?></div>
                             <?php
