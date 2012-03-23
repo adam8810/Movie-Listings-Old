@@ -33,18 +33,7 @@ $('document').ready(function()
         })
                 
         $('.button_link').click(function(e)
-        {
-            // Prevent from navigating away from page
-//            e.preventDefault();
-//                                    
-//            // Use Ajax call to interact with database
-//            $.ajax({
-//                url: this,
-//                success: function(){
-//                            
-//                }
-//            })
-                    
+        {                    
             $('.movie_item#' + this.id).animate({
                 height:0, 
                 width:0, 
