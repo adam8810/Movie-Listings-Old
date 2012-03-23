@@ -183,7 +183,8 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     public function action_remove_movie($ID)
     {
-        DB::delete('movies')->where('ID', 'like', $ID)->execute();
+        DB::update('movies')->value('visible', '0')->where('ID', 'like', $ID)->execute();
+        //DB::delete('movies')->where('ID', 'like', $ID)->execute();
     }
 
     public function action_hide_movie($ID)
