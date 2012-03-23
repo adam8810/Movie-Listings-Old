@@ -6,18 +6,9 @@ use Fuel\Core\Session;
 
 class Sessions extends \Model {
 
-    public static function set_username()
-    {
-        Session::set('userid', 'adam8810');
-    }
-
-    public static function get_username()
-    {
-        echo Session::get('userid');
-    }
-
     public static function set_search($search_query)
     {
+        echo 'query_search = ' . $search_query;
         // Sets the search query in the session
         Session::set('search_query', $search_query);
     }
