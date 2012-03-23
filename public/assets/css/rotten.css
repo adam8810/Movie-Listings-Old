@@ -8,7 +8,6 @@ div#wrapper{
     height: 100%;
     margin: 0 auto;
     width: 100%;
-    /*    overflow: auto;    */
 }
 
 div#top_box{
@@ -125,7 +124,6 @@ div.movie_item{
     position: relative;
     height: 187px;
     border-bottom: 3px solid #eef;
-    /*        padding: 5px 10px 10px 160px;*/
 }
 
 div.movie_item.odd{
@@ -136,7 +134,7 @@ div.movie_item.odd{
     left:0;
     top:0;
     height: 200px;
-    position: absolute !important;
+    position: absolute;
     border: 1px solid #000;
     width: 145px;
 }
@@ -188,22 +186,37 @@ div.movie_meta .content{
     background: #D6DAE0;
 }
 
+.movie_info{
+    display: none;
+    background: #000;
+    color: #FFF;
+    font-size: 10px;
+    position: absolute;
+    top: 0px;
+    padding: 5px;
+    height: 60%;
+    width: 136px;
+    opacity: .8;
+}
+
 .movie_btn{
+    background: #000;
     display: none;
     position: absolute;
-    bottom: 10px;
-    width: 140px;
+    bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
     text-align: center;
+    border-top: 1px solid green;
+    opacity: .8;
 }
 
 .button_link{
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
-    background: black;
-    border: 1px solid #FFF;
     color: #FFF;
-    padding: 4px 10px;
 }
 
 .add_w_rating ul li{
@@ -229,6 +242,15 @@ div.movie_meta .content{
     float: left;
     text-indent: -9999px;
     width: 20px;
+}
+
+.stars{
+    margin-left: 4px;
+}
+
+.stars ul li{
+    color: #FFF;
+    display: inline;
 }
 
 div.clearer{ clear:both; }
