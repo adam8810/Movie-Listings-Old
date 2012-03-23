@@ -11,21 +11,7 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     function before()
     {
-        if (Input::GET('title') != '')
-        {
-            Sessions::set_search(Input::GET('title'));
-            $this->title = Input::GET('title');
-            echo 'get = ' . $this->title.', session = '. Sessions::get_search();
-        }
-        else if (Sessions::get_search() != '')
-        {
-            $this->title = Sessions::get_search();
-            echo 'session = '. $this->title;
-        }
-        else
-        {
-            $this->title = "";
-        }
+        
     }
 
     function action_index()
@@ -41,6 +27,22 @@ class Controller_Playground_Apis_Rotten extends Controller {
 
     public function action_search()
     {
+        if (Input::GET('title') != '')
+        {
+            Sessions::set_search(Input::GET('title'));
+            $this->title = Input::GET('title');
+            echo 'get = ' . $this->title.', session = '. Sessions::get_search();
+        }
+        else if (Sessions::get_search() != '')
+        {
+            $this->title = Sessions::get_search();
+            echo 'session = '. $this->title;
+        }
+        else
+        {
+            $this->title = "";
+        }
+        
         $data = array();
 
         if ($this->title != "")
