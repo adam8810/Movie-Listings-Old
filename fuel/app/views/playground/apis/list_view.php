@@ -95,7 +95,7 @@
 
                                 <img id="<?= $m->id; ?>" height="100%" width="100%" src="<?= $m->img; ?>"/>
                                 <div id="<?= $m->id; ?>" class="movie_btn">
-                                    <a id="<?= $m->id; ?>" class="button_link background_link" id="<?= $m->id; ?>" href="<?= $add_link_wishlist; ?>">
+                                    <a id="<?= $m->id; ?>" class="transition_out background_link" id="<?= $m->id; ?>" href="<?= $add_link_wishlist; ?>">
                                     <?php echo $control_action == 'add' ? 'Add to Wishlist' : 'Remove'; ?>
                                     </a>
                                     <?php
