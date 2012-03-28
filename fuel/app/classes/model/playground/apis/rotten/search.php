@@ -21,7 +21,7 @@ class Search extends \Model {
 
 
         $api_key = 'ggwqebk73wfqdmuk8rph3uzz';
-        $url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=' . $api_key . '&q=' . str_replace(' ', '+', $keyword);
+        $url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?&page_limit=20&apikey=' . $api_key . '&q=' . str_replace(' ', '+', $keyword);
 
         $url = file_get_contents($url);
         $json = json_decode($url);
