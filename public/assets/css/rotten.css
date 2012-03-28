@@ -39,6 +39,7 @@ div#movie_info_box{
     overflow-x: hidden;
     height: 90%;
     border-top: 1px solid #999;
+    background: #999;
 }
 
 #page_controls{
