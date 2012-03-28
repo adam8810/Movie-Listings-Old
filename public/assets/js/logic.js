@@ -9,23 +9,23 @@ $('document').ready(function()
                 switch ($hash)
                 {
                     case '#list':
-                         $.ajax({
-                        url: 'set_view/list'
-                    });
+                        $.ajax({
+                            url: 'set_view/list'
+                        });
                         view_list();              
                     
                         break;
                     case '#albumlist':
-                         $.ajax({
-                        url: 'set_view/albumlist'
-                    });
+                        $.ajax({
+                            url: 'set_view/albumlist'
+                        });
                         view_albumlist();
                     
                         break;
                     case '#grid':
-                         $.ajax({
-                        url: 'set_view/grid'
-                    });
+                        $.ajax({
+                            url: 'set_view/grid'
+                        });
                         view_grid();
                         break;
                 }
@@ -68,20 +68,11 @@ $('document').ready(function()
         $('.transition_out').click(function(e)
         {
             $('.movie_item#' + this.id).animate({
-                width:'0px'
-            },'slow');
-            
-        /* old
-            $('.movie_item#' + this.id).animate({
-                height:0, 
-                width:0, 
-                opacity: .5
-            }, 100, "linear", function(){
+                width:0,
+                height:0
+            }, 300, "linear", function(){
                 $('.movie_item#' + this.id).css('display','none')
-            } );
-            
-            */
-                                    
+            } );                   
         });
                 
         $('a.view_btn').click(function(e){
@@ -182,7 +173,7 @@ $('document').ready(function()
             $('span.header').css('display','inline');
             $('.movie_item').css('margin-bottom','0px');
             $('div.content').css('display','none');
-            $('div.movie_item').css('width','145px').css('height','202px').css('padding','0px').css('float','left');
+            $('div.movie_item').css('width','145px').css('height','199px').css('padding','0px').css('float','left');
             $('div#movie_head').css('display', 'none');
         }
     });
