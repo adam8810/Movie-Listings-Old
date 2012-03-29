@@ -57,8 +57,13 @@ $('document').ready(function()
            
         // Hover effect of Add/Remove Button
         $('.img_wrapper').hover(function(){ // Hover on
-            $('#' + this.id + ' .movie_info').slideDown('fast').css('display','block');
-            $('#' + this.id + ' .movie_btn').slideDown(200).css('display','block');
+            var value_id = this.id;
+            
+            setTimeout(function() {
+                $('#' + value_id + ' .movie_info').slideDown('fast').css('display','block');
+                $('#' + value_id + ' .movie_btn').slideDown(200).css('display','block');
+            }, 300, value_id);
+            
         }, function(){ // Off
             $('#' + this.id + ' .movie_info').slideUp(90)
             $('#' + this.id + ' .movie_btn').slideUp(190)
