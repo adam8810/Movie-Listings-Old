@@ -59,10 +59,10 @@ $('document').ready(function()
         $('.img_wrapper').hover(function(){ // Hover on
             var value_id = this.id;
             
-            setTimeout(function() {
+//            setTimeout(function() {
                 $('#' + value_id + ' .movie_info').slideDown('fast').css('display','block');
                 $('#' + value_id + ' .movie_btn').slideDown(200).css('display','block');
-            }, 300, value_id);
+//            }, 300, value_id);
             
         }, function(){ // Off
             $('#' + this.id + ' .movie_info').slideUp(90)
