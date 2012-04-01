@@ -35,7 +35,7 @@ class Search extends \Model {
             $movie = new Movie();
 
             $movie->title = $json->movies[$i]->title;
-            $movie->img = $json->movies[$i]->posters->profile;
+            $movie->img = $json->movies[$i]->posters->detailed;
             $movie->rating = $json->movies[$i]->mpaa_rating;
             $movie->year = $json->movies[$i]->year;
             $movie->m_rating = $json->movies[$i]->mpaa_rating;
